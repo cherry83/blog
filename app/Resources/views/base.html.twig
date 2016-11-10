@@ -6,6 +6,7 @@
     <title>{% block title %}SoftUni Blog{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
@@ -33,6 +34,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{ path('admin_users') }}">Users</a></li>
+                                        <li><a href="{{ path('admin_categories') }}">Categories</a></li>
                                     </ul>
                                 </li>
                             {% endif %}

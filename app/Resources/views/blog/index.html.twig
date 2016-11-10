@@ -3,31 +3,19 @@
 {% block main %}
     <div class="container body-content">
         <div class="row">
-            {% for article in articles %}
+            {% for category in categories %}
                 <div class="col-md-6">
-                    <article>
-                        <header>
-                            <h2>{{ article.title }}</h2>
-                        </header>
-
-                        <p>
-                            {{ article.summary }}
-                        </p>
-
-                        <small class="author">
-                            {{ article.date.format('d.m.Y  H:i:s') }} by {{ article.author.fullName }}
-                        </small>
-
-                        <footer>
-                            <div class="pull-right">
-                                <a class="btn btn-default btn-xs"
-                                   href="{{ path('article_view', {'id':article.id}) }}">Read more &raquo;</a>
-                            </div>
-                        </footer>
-                    </article>
+                    <header>
+                        <h2>
+                            <a href="{{ path('category_articles', {'id': category.id}) }}">
+                                {{ category.name }} ({{ category.articles.count }})
+                            </a>
+                        </h2>
+                    </header>
                 </div>
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}
+
+

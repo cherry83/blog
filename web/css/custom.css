@@ -2,8 +2,14 @@
     background-color: #FF7F50 ;
 }
 .navbar-default .navbar-brand {
-    color: #240D0D;
+    color: #804C4C;
 }
 .navbar-default .navbar-nav > li > a {
+    color: #804C4C;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #240D0D;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
     color: #240D0D;
 }

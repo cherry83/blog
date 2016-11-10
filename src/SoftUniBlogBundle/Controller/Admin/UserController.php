@@ -104,7 +104,7 @@ class UserController extends Controller
             $em->remove($user);
             $em->flush();
 
-            $this->redirectToRoute('admin_users');
+            return $this->redirectToRoute('admin_users');
         }
 
         return $this->render('admin/user/delete.html.twig', ['form' => $form->createView(), 'user' => $user]);
