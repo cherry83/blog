@@ -39,7 +39,7 @@ class UserController extends Controller
         $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
         if ($user === null) {
-            $this->redirectToRoute('admin_users');
+            return $this->redirectToRoute('admin_users');
         }
 
         $originalPassword = $user->getPassword();

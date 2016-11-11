@@ -3,14 +3,15 @@
 {% block main %}
     <div class="container body-content span=8 offset=2">
         <div class="well">
-            <form class="form-horizontal" action="{{ path('admin_categories_create') }}" method="POST">
+            <form class="form-horizontal" action="{{ path('admin_categories_delete', {'id': category.id}) }}"
+                  method="POST">
                 <fieldset>
-                    <legend>New Category</legend>
+                    <legend>Delete Category</legend>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="article_title">Category Name</label>
                         <div class="col-sm-4 ">
-                            <input type="text" class="form-control" id="article_title" placeholder="Category Name" name="category[name]" required>
+                            <input type="text" class="form-control" id="article_title" placeholder="Category Name" name="category[name]" value="{{ category.name }}" disabled>
                         </div>
                     </div>
 

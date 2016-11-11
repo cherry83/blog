@@ -14,13 +14,13 @@
                     </p>
 
                     <small class="author">
-                        {{ article.date.format('d.m.Y  H:i:s') }} by {{ article.author.fullName }}
+                        Created on {{ article.date.format('d.m.Y  H:i:s') }} by {{ article.author.fullName }}
                     </small>
 
                     <footer>
                         <div class="pull-left">
                             {% for tag in article.tags  %}
-                                <a class="btn btn-default btn-xs" href="#">{{ tag.name }}</a>
+                                <a class="btn btn-default btn-xs" href="{{ path('articles_with_tag', {'name': tag.name}) }}">{{ tag.name }}</a>
                             {% endfor %}
                         </div>
 

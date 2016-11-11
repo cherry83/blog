@@ -73,7 +73,7 @@ class Tag
     /**
      * @return ArrayCollection
      */
-    public function getArticlea()
+    public function getArticles()
     {
         return $this->articles;
     }

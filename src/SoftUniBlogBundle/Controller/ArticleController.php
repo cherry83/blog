@@ -82,12 +82,12 @@ class ArticleController extends Controller
         $tags = $article->getTags();
 
         $tagNames = [];
-        foreach ($tags as $tag){
-            $tagNames[]=$tag->getName();
+        foreach ($tags as $tag) {
+            $tagNames[] = $tag->getName();
         }
 
 //        $tagsString = implode(", ",$tags->toArray() );
-        $tagsString = implode(", ",$tagNames );
+        $tagsString = implode(", ", $tagNames);
 
 
         $currentUser = $this->getUser();
@@ -162,14 +162,16 @@ class ArticleController extends Controller
 
         foreach ($tags as $tagName) {
             $tagName = trim($tagName);
-            $tag = $tagRepo->findOneBy(["name" => $tagName]);
-            if ($tag === null) {
-                $tag = new Tag();
-                $tag->setName($tagName);
-                $em->persist($tag);
-            }
+            if ($tagName !== '') {
+                $tag = $tagRepo->findOneBy(["name" => $tagName]);
+                if ($tag === null) {
+                    $tag = new Tag();
+                    $tag->setName($tagName);
+                    $em->persist($tag);
+                }
 
-            $tagsToSave->add($tag);
+                $tagsToSave->add($tag);
+            }
         }
         return $tagsToSave;
     }

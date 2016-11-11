@@ -23,8 +23,8 @@
                             <td>{{ category.id }}</td>
                             <td>{{ category.getName() }}</td>
                             <td>
-                                <a href="#">Edit</a>
-                                <a href="#">Delete</a>
+                                <a href="{{ path('admin_categories_edit', {'id': category.id}) }}">Edit</a>
+                                <a href="{{ path('admin_categories_delete', {'id': category.id}) }}">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}

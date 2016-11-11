@@ -2,8 +2,10 @@
 
 {% block main %}
     <div class="container body-content">
+        {%  if tag.name is defined %}
+        <h1>Searching by tag - {{ tag.name }}</h1>
         <div class="row">
-            {% for article in articles %}
+            {% for article in tag.articles %}
                 <div class="col-md-6">
                     <article>
                         <header>
@@ -13,17 +15,18 @@
                         <p>
                             {{ article.summary }}
                         </p>
-
                         <small class="author">
                             Created on {{ article.date.format('d.m.Y  H:i:s') }} by {{ article.author }}
                         </small>
 
+
                         <footer>
-                            <div class="pull-left">
-                                {% for tag in article.tags  %}
-                                    <a class="btn btn-default btn-xs" href="{{ path('articles_with_tag', {'name': tag.name}) }}">{{ tag.name }}</a>
+                            <p>
+                                {% for tag in article.tags %}
+                                    <a class="btn btn-default btn-xs"
+                                       href="{{ path('articles_with_tag', {'name': tag.name}) }}">{{ tag.name }}</a>
                                 {% endfor %}
-                            </div>
+                            </p>
                             <div class="pull-right">
                                 <a class="btn btn-default btn-xs"
                                    href="{{ path('article_view', {'id': article.id}) }}">Read more &raquo;</a>
@@ -33,5 +36,11 @@
                 </div>
             {% endfor %}
         </div>
+        {% else %}
+        <h1>Searching by tag - {{ tag }}</h1>
+        <div class="row">
+            <h2>No result</h2>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
