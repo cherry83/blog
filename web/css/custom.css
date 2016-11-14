@@ -1,3 +1,18 @@
+html, body {
+    height: 100%;
+}
+.wraper{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+body>footer, .push {
+    height: 4em;
+}
+body>footer{
+    background-color: #FF7F50 ;
+}
 .navbar-default {
     background-color: #FF7F50 ;
 }

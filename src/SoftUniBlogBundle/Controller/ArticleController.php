@@ -4,7 +4,6 @@ namespace SoftUniBlogBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use SoftUniBlogBundle\Entity\Article;
@@ -14,6 +13,7 @@ use SoftUniBlogBundle\Form\ArticleType;
 use SoftUniBlogBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ArticleController extends Controller
@@ -123,13 +123,16 @@ class ArticleController extends Controller
      *
      * @param $id
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function deleteArticle($id, Request $request)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
         if ($article === null)
             return $this->redirectToRoute("blog_index");
+
+        $tags = $article->getTags();
+        $tagsString = implode(', ', $tags->toArray());
 
         $currentUser = $this->getUser();
         if (!$currentUser->isAuthor($article) && !$currentUser->isAdmin())
@@ -140,12 +143,16 @@ class ArticleController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->remove($article);
             $em->flush();
             return $this->redirectToRoute('blog_index');
         }
 
-        return $this->render('article/delete.html.twig', array('article' => $article, 'form' => $form->createView()));
+        return $this->render('article/delete.html.twig', array(
+            'article' => $article,
+            'form' => $form->createView(),
+            'tags' => $tagsString));
     }
 
     /**

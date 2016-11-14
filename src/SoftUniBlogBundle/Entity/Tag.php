@@ -92,5 +92,9 @@ class Tag
         $this->articles = new ArrayCollection();
     }
 
+    function __toString()
+    {
+        return $this->getName();
+    }
 }
 
